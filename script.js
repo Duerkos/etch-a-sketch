@@ -1,10 +1,10 @@
 const resize = document.querySelector(".resize");
+const clear = document.querySelector(".clear");
 const sketchGrid = document.querySelector(".sketchGrid");
-let size = 20;
+let size = 16;
 
 function createGrid(size) {
-    // We substract 2 because we decided to put a border of 1px always.
-    let divSize = sketchGrid.offsetWidth / size - 2;
+    let divSize = sketchGrid.offsetWidth / size;
     for (let i = 0; i < size*size; i++) {
         let square = document.createElement("div");
         square.classList.add("square");
@@ -21,10 +21,17 @@ function createGrid(size) {
     
 }
 
-function clearGrid() {
+function removeGrid() {
     const squares = document.querySelectorAll(".square")
     squares.forEach((square) => {
         square.remove();
+    });
+}
+
+function clearGrid() {
+    const squares = document.querySelectorAll(".square")
+    squares.forEach((square) => {
+        square.classList.remove("black");
     });
 }
 
@@ -33,9 +40,7 @@ window.onload = function() {
   };
 
 function reGridWindowResize() {
-    let divSize = sketchGrid.offsetWidth / size - 2;
-    console.log("sketchsize" + sketchGrid.offsetWidth);
-    console.log("squaresize" + divSize);
+    let divSize = sketchGrid.offsetWidth / size;
     const squares = document.querySelectorAll(".square")
     squares.forEach((square) => {
         square.style.width = divSize + "px";
@@ -65,7 +70,11 @@ resize.addEventListener("click", () => {
             size = 1;
         } else size = Math.floor(size);
 
-        clearGrid();
+        removeGrid();
         createGrid(size);
     } else console.log("fail");
+});
+
+clear.addEventListener("click", () => {
+    clearGrid();
 });
