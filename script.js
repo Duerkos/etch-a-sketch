@@ -5,6 +5,10 @@ let size = 16;
 
 function createGrid(size) {
     let divSize = sketchGrid.offsetWidth / size;
+    divSize = Math.floor(divSize);
+    sketchGrid.style.height = divSize * size + "px";
+    sketchGrid.style.width = divSize * size + "px";
+
     for (let i = 0; i < size*size; i++) {
         let square = document.createElement("div");
         square.classList.add("square");
@@ -40,7 +44,12 @@ window.onload = function() {
   };
 
 function reGridWindowResize() {
+    sketchGrid.style.height = "";
+    sketchGrid.style.width = "";
     let divSize = sketchGrid.offsetWidth / size;
+    divSize = Math.floor(divSize);
+    sketchGrid.style.height = divSize * size + "px";
+    sketchGrid.style.width = divSize * size + "px";
     const squares = document.querySelectorAll(".square")
     squares.forEach((square) => {
         square.style.width = divSize + "px";
