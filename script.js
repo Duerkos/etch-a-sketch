@@ -11,6 +11,12 @@ function createGrid(size) {
         square.style.width = divSize + "px";
         square.style.height = divSize + "px";
         sketchGrid.append(square);
+        square.addEventListener("mouseover", () =>{
+            square.classList.add("black");
+        });
+        square.addEventListener("click", () =>{
+            square.classList.add("black");
+        });
     }
     
 }
